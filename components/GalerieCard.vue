@@ -1,0 +1,46 @@
+<template>
+  <article class="flex flex-col rounded-lg shadow-lg overflow-hidden">
+    <div class="flex-1">
+      <img class="h-full w-full object-cover" :src="img" :alt="fullName" />
+    </div>
+    <div class="flex-shrink-0 bg-white py-4 px-6 flex flex-col justify-between">
+      <div class="flex items-center">
+        <p class="text-sm font-medium text-gray-900">
+          <span class="font-bold pr-2">{{ fullName }}</span>
+          <time class="text-sm text-gray-500" :datetime="date">
+            {{ formatDate(date) }}
+          </time>
+        </p>
+      </div>
+    </div>
+  </article>
+</template>
+
+<script>
+export default {
+  props: {
+    fullName: {
+      type: String,
+      default: 'Juan Perez',
+    },
+    image: {
+      type: String,
+      default: 'King.jpg',
+    },
+    date: {
+      type: String,
+      default: 'Ene 1, 2020',
+    },
+  },
+  computed: {
+    img() {
+      return require(`@/assets/img/${this.image}`)
+    },
+  },
+  methods: {
+    formatDate(date) {
+      return date
+    },
+  },
+}
+</script>

@@ -1,6 +1,7 @@
 const fs = require('fs')
+const path = require('path')
 const tours = JSON.parse(
-  fs.readFileSync(`${__dirname}/../dev-data/data/tours-simple.json`)
+  fs.readFileSync(path.join(__dirname, `/../DB/data/tours-simple.json`))
 )
 exports.validateID = (req, res, next, id) => {
   const tourId = id
@@ -47,9 +48,10 @@ exports.postTours = (req, res) => {
 
   tours.push(newTour)
   fs.writeFile(
-    `${__dirname}/dev-data/data/tours-simple.json`,
+    path.join(__dirname, `/../DB/data/tours-simple.json`),
     JSON.stringify(tours),
     (err) => {
+      console.log(err)
       res.status(201).json({
         status: 'success',
         data: {

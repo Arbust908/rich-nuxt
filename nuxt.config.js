@@ -1,11 +1,11 @@
 export default {
   server: {
-    port: 3000,
+    port: 3096,
     host: '0.0.0.0',
   },
 
   head: {
-    title: 'full-nuxt-app',
+    title: 'Rich Cova || Rulologo',
     meta: [
       { charset: 'utf-8' },
       { name: 'viewport', content: 'width=device-width, initial-scale=1' },
@@ -13,12 +13,12 @@ export default {
       {
         hid: `og:title`,
         property: 'og:title',
-        content: `Quiero Invitar`,
+        content: `Rich Cova || Rulologo`,
       },
       {
         hid: `og:description`,
         property: 'og:description',
-        content: `Estas invitado! | Quiero Invitar`,
+        content: `Estas invitado! | Rich Cova || Rulologo`,
       },
       // {
       //     hid: `og:image`,
@@ -28,22 +28,22 @@ export default {
       {
         hid: `og:site_name`,
         property: 'og:site_name',
-        content: `Quiero Invitar`,
+        content: `Rich Cova || Rulologo`,
       },
-      // {
-      //     hid: `og:url`,
-      //     property: 'og:url',
-      //     content: this.baseUrl + this.$route.fullPath
-      // },
+      {
+        hid: `og:url`,
+        property: 'og:url',
+        content: `richcova.com`,
+      },
       {
         hid: 'twitter:title',
         property: 'twitter:title',
-        content: `Quiero Invitar`,
+        content: `Rich Cova || Rulologo`,
       },
       {
         hid: 'twitter:description',
         property: 'twitter:description',
-        content: `Estas invitado! | Quiero Invitar`,
+        content: `Estudio de peluquería especializado en cabellos ondulados, rizados y afros.`,
       },
       {
         hid: 'twitter:image:src',
@@ -63,7 +63,7 @@ export default {
       {
         hid: 'twitter:site',
         property: 'twitter:site',
-        content: `@quieroinvitar`,
+        content: `richcova.com`,
       },
     ],
     link: [
