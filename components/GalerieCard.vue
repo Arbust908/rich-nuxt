@@ -5,13 +5,16 @@
     </div>
     <div class="flex-shrink-0 bg-white py-4 px-6 flex flex-col justify-between">
       <div class="flex items-center">
-        <p class="text-sm font-medium text-gray-900">
+        <p class="font-medium text-gray-900">
           <span class="font-bold pr-2">{{ fullName }}</span>
           <time class="text-sm text-gray-500" :datetime="date">
             {{ formatDate(date) }}
           </time>
         </p>
       </div>
+      <p v-if="text" class="text-sm font-medium text-gray-900">
+        {{ text }}
+      </p>
     </div>
   </article>
 </template>
@@ -30,6 +33,10 @@ export default {
     date: {
       type: String,
       default: 'Ene 1, 2020',
+    },
+    text: {
+      type: String,
+      default: '',
     },
   },
   computed: {

@@ -1,6 +1,6 @@
 export default {
   server: {
-    port: 3096,
+    port: 3666,
     host: '0.0.0.0',
   },
 
@@ -138,7 +138,9 @@ export default {
     ],
   ],
 
-  axios: {},
+  axios: {
+    baseURL: 'http://192.168.0.184:3666/api',
+  },
 
   pwa: {
     manifest: {

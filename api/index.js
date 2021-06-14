@@ -4,6 +4,7 @@ const app = express()
 const tourRouter = require('./routes/tourRoutes')
 const userRouter = require('./routes/userRoutes')
 const passportRouter = require('./routes/passportRoutes')
+const infoRouter = require('./routes/infoRouter')
 
 app.use(express.json())
 app.use(cors())
@@ -14,9 +15,10 @@ app.use((req, res, next) => {
 })
 // *** Router
 const apiV1Route = ''
-app.use(`${apiV1Route}/tours`, tourRouter)
 app.use(`${apiV1Route}/users`, userRouter)
+app.use(`${apiV1Route}/tours`, tourRouter)
 app.use(`${apiV1Route}/pass`, passportRouter)
+app.use(`${apiV1Route}/info`, infoRouter)
 
 // Export
 module.exports = {

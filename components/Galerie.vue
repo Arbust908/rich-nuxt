@@ -21,16 +21,27 @@
       <div
         class="mt-12 max-w-lg mx-auto grid gap-5 lg:grid-cols-3 lg:max-w-none"
       >
-        <GalerieCard full-name="Persona 1" image="BA-1.jpg" />
-        <GalerieCard full-name="Persona 2" image="BA-2.jpg" />
-        <GalerieCard full-name="Persona 3" image="BA-3.jpg" />
+        <GalerieCard
+          v-for="(inform, key) in galerias"
+          :key="key"
+          :full-name="inform.titulo"
+          :image="inform.src"
+          :text="inform.texto"
+          :date="inform.fecha"
+        />
       </div>
     </div>
   </div>
 </template>
 
 <script>
+import { mapState } from 'vuex'
 export default {
   name: 'Galerie',
+  computed: {
+    ...mapState({
+      galerias: (state) => state.images,
+    }),
+  },
 }
 </script>

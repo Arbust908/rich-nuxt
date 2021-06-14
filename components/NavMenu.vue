@@ -1,11 +1,11 @@
 <template>
   <nav>
-    <a
-      href="#"
+    <button
       class="text-base font-medium text-gray-600 hover:text-orange-500"
+      @click="openPolitics"
     >
       Politica
-    </a>
+    </button>
 
     <a
       href="#redes"
@@ -14,15 +14,16 @@
       Redes
     </a>
 
-    <a
-      href="https://wa.me/5491138766488"
+    <button
       class="text-base font-medium text-gray-600 hover:text-orange-500"
+      @click="openConsults"
     >
       Consultas
-    </a>
+    </button>
 
     <a
-      href="https://youtube.com/channel/UCGn0RPDob9Ohaux-xUIAbog"
+      v-if="redes"
+      :href="redes.youtube"
       target="_blank"
       class="text-base font-medium text-gray-600 hover:text-orange-500"
     >
@@ -30,7 +31,8 @@
     </a>
 
     <a
-      href="https://richtiendashop.mitiendanube.com/"
+      v-if="redes"
+      :href="redes.tienda"
       target="_blank"
       class="text-base font-medium text-gray-600 hover:text-orange-500"
     >
@@ -38,3 +40,20 @@
     </a>
   </nav>
 </template>
+
+<script>
+import { mapActions, mapState } from 'vuex'
+export default {
+  computed: {
+    ...mapState({
+      redes: (state) => state.social,
+    }),
+  },
+  methods: {
+    ...mapActions({
+      openPolitics: 'openPolitics',
+      openConsults: 'openConsults',
+    }),
+  },
+}
+</script>

@@ -50,6 +50,12 @@ exports.validateID = (req, res, next, id) => {
   next()
 }
 exports.validateBody = (req, res, next) => {
+  console.log(
+    req.body.username,
+    req.body.password,
+    req.body.passwordcc,
+    req.body.secret
+  )
   if (
     !req.body.username ||
     !req.body.password ||
@@ -84,9 +90,14 @@ exports.validateCredential = (req, res, next) => {
       token: tokens[2],
       user,
     })
+  } else {
+    return res.status(400).json({
+      status: 'failed',
+      message: 'Los datos no concuerdan',
+    })
   }
-  next()
 }
+
 exports.getAll = (req, res) => {
   res.status(200).json({
     status: 'success',

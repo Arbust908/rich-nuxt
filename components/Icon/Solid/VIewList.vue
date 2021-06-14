@@ -12,3 +12,8 @@
     />
   </svg>
 </template>
+<script>
+export default {
+  name: 'IconSolidViewList',
+}
+</script>

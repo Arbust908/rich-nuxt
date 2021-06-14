@@ -1,5 +1,6 @@
 <template>
   <div class="h-screen bg-orange-50 flex overflow-hidden">
+    <ModalsUMS />
     <!-- Narrow sidebar -->
     <div class="hidden w-28 bg-orange-700 overflow-y-auto md:block">
       <div class="w-full py-6 flex flex-col items-center">
@@ -7,16 +8,23 @@
           <Logo class="w-12 h-12 text-orange-50" />
         </div>
         <div v-if="isLogged" class="flex-1 mt-6 w-full px-2 space-y-1">
-          <PannelSideBtn links="/panel/" name="Inicio">
+          <PannelSideBtn links="/" name="Sitio">
+            <template #icon>
+              <IconOutlineWeb
+                class="text-orange-300 group-hover:text-white h-6 w-6"
+              />
+            </template>
+          </PannelSideBtn>
+          <PannelSideBtn links="/panel" name="Inicio">
             <template #icon>
               <IconOutlineHome
                 class="text-orange-300 group-hover:text-white h-6 w-6"
               />
             </template>
           </PannelSideBtn>
-          <PannelSideBtn links="/panel/secciones" name="Secciones">
+          <PannelSideBtn links="/panel/hero" name="Cabezera">
             <template #icon>
-              <IconOutlineViewGrid
+              <IconOutlineCollection
                 class="text-orange-300 group-hover:text-white h-6 w-6"
               />
             </template>
@@ -35,20 +43,20 @@
               />
             </template>
           </PannelSideBtn>
-          <PannelSideBtn links="/panel/promociones" name="Promos">
+          <PannelSideBtn links="/panel/politicas" name="Politicas">
             <template #icon>
-              <IconOutlineCollection
+              <IconOutlineClipboardList
                 class="text-orange-300 group-hover:text-white h-6 w-6"
               />
             </template>
           </PannelSideBtn>
-          <PannelSideBtn links="/panel/ajustes" name="Ajustes">
+          <!-- <PannelSideBtn links="/panel/ajustes" name="Ajustes">
             <template #icon>
               <IconOutlineCog
                 class="text-orange-300 group-hover:text-white h-6 w-6"
               />
             </template>
-          </PannelSideBtn>
+          </PannelSideBtn> -->
         </div>
       </div>
     </div>
@@ -85,6 +93,13 @@
             <div class="mt-5 flex-1 h-0 px-2 overflow-y-auto">
               <nav class="h-full flex flex-col">
                 <div v-if="isLogged" class="space-y-1">
+                  <PannelSideBtnMobile links="/" name="Sitio">
+                    <template #icon>
+                      <IconOutlineHome
+                        class="text-orange-300 group-hover:text-white h-6 w-6"
+                      />
+                    </template>
+                  </PannelSideBtnMobile>
                   <PannelSideBtnMobile links="/panel/" name="Inicio">
                     <template #icon>
                       <IconOutlineHome
@@ -92,12 +107,9 @@
                       />
                     </template>
                   </PannelSideBtnMobile>
-                  <PannelSideBtnMobile
-                    links="/panel/secciones"
-                    name="Secciones"
-                  >
+                  <PannelSideBtnMobile links="/panel/hero" name="Cabezera">
                     <template #icon>
-                      <IconOutlineViewGrid
+                      <IconOutlineCollection
                         class="text-orange-300 group-hover:text-white h-6 w-6"
                       />
                     </template>
@@ -119,20 +131,23 @@
                       />
                     </template>
                   </PannelSideBtnMobile>
-                  <PannelSideBtnMobile links="/panel/promociones" name="Promos">
+                  <PannelSideBtnMobile
+                    links="/panel/politicas"
+                    name="Politicas"
+                  >
                     <template #icon>
                       <IconOutlineCollection
                         class="text-orange-300 group-hover:text-white h-6 w-6"
                       />
                     </template>
                   </PannelSideBtnMobile>
-                  <PannelSideBtnMobile links="/panel/ajustes" name="Ajustes">
+                  <!-- <PannelSideBtnMobile links="/panel/ajustes" name="Ajustes">
                     <template #icon>
                       <IconOutlineCog
                         class="text-orange-300 group-hover:text-white h-6 w-6"
                       />
                     </template>
-                  </PannelSideBtnMobile>
+                  </PannelSideBtnMobile> -->
                 </div>
               </nav>
             </div>
@@ -188,13 +203,18 @@
                     @click="openProfile = !openProfile"
                   >
                     <span class="sr-only">Open user menu</span>
-                    <picture class="p-1 rounded-full bg-orange-100">
+                    <div
+                      class="py-1 px-5 rounded-lg bg-orange-100 font-bold text-sm"
+                    >
+                      <span>{{ user.username }}</span>
+                    </div>
+                    <!-- <picture class="p-1 rounded-full bg-orange-100">
                       <img
                         class="h-5 w-auto sm:h-10"
                         src="/favicon-152.svg"
                         alt="Rich Cova"
                       />
-                    </picture>
+                    </picture> -->
                   </button>
                 </div>
 
@@ -232,13 +252,22 @@
 </template>
 
 <script>
+import { mapState } from 'vuex'
+
 export default {
   data() {
     return {
       openMenu: false,
       openProfile: false,
-      isLogged: false,
     }
+  },
+  computed: {
+    ...mapState({
+      user: (state) => state.user,
+    }),
+    isLogged() {
+      return this.user && this.user.id
+    },
   },
 }
 </script>
