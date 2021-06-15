@@ -30,7 +30,8 @@
     "nuxt": "^2.15.3",
     "nuxt-fontawesome": "^0.4.0",
     "nuxt-i18n": "^6.22.3",
-    "nuxt-mq": "^2.0.2"
+    "nuxt-mq": "^2.0.2",
+    "nuxt-start": "^2.15.7"
   },
   "devDependencies": {
     "@nuxtjs/eslint-config": "^6.0.0",
