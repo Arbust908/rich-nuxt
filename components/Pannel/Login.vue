@@ -1,6 +1,7 @@
 <template>
-  <div
+  <form
     class="bg-white overflow-hidden shadow rounded-lg divide-y divide-gray-200 max-w-sm mx-auto"
+    @submit.prevent=""
   >
     <PannelLoginHeader />
     <div class="px-4 py-5 sm:p-6 text-left space-y-2">
@@ -107,7 +108,7 @@
         volver al sitio
       </nuxt-link>
     </div>
-  </div>
+  </form>
 </template>
 
 <script>

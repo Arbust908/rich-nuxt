@@ -1,7 +1,11 @@
 <template>
   <article class="flex flex-col rounded-lg shadow-lg overflow-hidden">
     <div class="flex-1">
-      <img class="h-full w-full object-cover" :src="img" :alt="fullName" />
+      <img
+        class="h-full w-full object-cover"
+        :src="getApiImage(image)"
+        :alt="fullName"
+      />
     </div>
     <div class="flex-shrink-0 bg-white py-4 px-6 flex flex-col justify-between">
       <div class="flex items-center">
@@ -20,7 +24,9 @@
 </template>
 
 <script>
+import picaso from '@/mixins/picaso'
 export default {
+  mixins: [picaso],
   props: {
     fullName: {
       type: String,
@@ -37,11 +43,6 @@ export default {
     text: {
       type: String,
       default: '',
-    },
-  },
-  computed: {
-    img() {
-      return require(`@/assets/img/${this.image}`)
     },
   },
   methods: {

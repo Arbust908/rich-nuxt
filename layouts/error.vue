@@ -23,7 +23,7 @@
             >
               <img
                 class="object-cover object-center rounded-3xl shadow-2xl"
-                src="@/assets/img/error.jpg"
+                :src="getApiImage('error.jpg')"
                 alt=""
               />
             </div>
@@ -125,7 +125,10 @@
 </template>
 
 <script>
+import picaso from '@/mixins/picaso'
+
 export default {
+  mixins: [picaso],
   props: ['error'],
   // layout: 'error' // you can set a custom layout for the error page
 }

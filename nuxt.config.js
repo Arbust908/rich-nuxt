@@ -1,6 +1,6 @@
 export default {
   server: {
-    port: 3666,
+    port: process.env.PORT || 3663,
     host: '0.0.0.0',
   },
 
@@ -102,7 +102,7 @@ export default {
 
   components: true,
 
-  serverMiddleware: ['~/api/index.js'],
+  // serverMiddleware: ['~/api/index.js'],
 
   buildModules: ['@nuxtjs/eslint-module', '@nuxtjs/tailwindcss'],
 
@@ -139,7 +139,15 @@ export default {
   ],
 
   axios: {
-    baseURL: 'http://192.168.0.184:3666/api',
+    baseURL: process.env.API_URL || 'https://api.richcova.com/',
+  },
+
+  env: {
+    baseURL: process.env.API_URL || 'https://api.richcova.com/',
+  },
+
+  publicRuntimeConfig: {
+    baseURL: process.env.API_URL || 'https://api.richcova.com/',
   },
 
   pwa: {

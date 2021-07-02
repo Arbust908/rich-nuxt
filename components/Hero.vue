@@ -45,7 +45,7 @@
     >
       <img
         class="absolute inset-0 w-full h-full object-cover lg:rounded-bl-md"
-        :src="heroImage"
+        :src="getApiImage(heroImage)"
         alt="Imagen de Rich Cova"
       />
     </div>
@@ -53,8 +53,10 @@
 </template>
 
 <script>
+import picaso from '@/mixins/picaso'
 import { mapActions, mapState } from 'vuex'
 export default {
+  mixins: [picaso],
   computed: {
     ...mapState({
       hero: (state) => state.hero,
@@ -75,11 +77,7 @@ export default {
       return this.hero && this.hero.buttons.second
     },
     heroImage() {
-      return (
-        this.hero &&
-        this.hero.heroSrc &&
-        require(`@/assets/img/${this.hero.heroSrc}`)
-      )
+      return this.hero && this.hero.heroSrc
     },
   },
   methods: {

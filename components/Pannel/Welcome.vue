@@ -5,7 +5,7 @@
       <div class="absolute inset-0">
         <img
           class="w-full h-full object-cover"
-          src="@/assets/img/welcome(2).jpg"
+          :src="getApiImage(welcomeImg())"
           alt=""
         />
         <div
@@ -79,7 +79,7 @@
 import IconOutlinePhotos from '@/components/Icon/Outline/Photos.vue'
 import IconOutlineUserGroup from '@/components/Icon/Outline/UserGroup.vue'
 import IconOutlineClipboardList from '@/components/Icon/Outline/ClipboardList.vue'
-
+import picaso from '@/mixins/picaso'
 const supportLinks = [
   {
     name: 'Fotos',
@@ -105,10 +105,17 @@ const supportLinks = [
 ]
 
 export default {
+  mixins: [picaso],
   data() {
     return {
       supportLinks,
     }
+  },
+  methods: {
+    welcomeImg() {
+      const num = Math.floor(Math.random() * 4) + 1
+      return `welcome(${num}).jpg`
+    },
   },
 }
 </script>

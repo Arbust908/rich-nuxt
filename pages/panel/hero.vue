@@ -36,14 +36,21 @@
       </article>
       <article class="max-w-2xl flex gap-4 relative">
         <img
-          :src="imgSrc"
+          :src="getApiImage(hero.heroSrc)"
           class="object-cover pointer-events-none rounded max-w-sm"
         />
         <div>
           <button
             type="submit"
             class="absolute bottom-0 left-0 ml-3 mb-3 inline-flex justify-center py-2 px-4 border border-transparent shadow-sm text-sm font-medium rounded-md text-white bg-orange-600 hover:bg-orange-700 focus:outline-none ring-1 ring-white focus:ring-2 focus:ring-offset-2 focus:ring-orange-500"
-            @click.prevent="save"
+            @click.prevent="
+              changeImage({
+                title: 'Foto de Cabezera',
+                return: '/panel/hero',
+                fileName: 'rulologo.jpg',
+                heroSrc: hero.heroSrc,
+              })
+            "
           >
             Cambiar
           </button>
@@ -100,10 +107,12 @@
 </template>
 
 <script>
+import picaso from '@/mixins/picaso'
 import { mapState, mapActions } from 'vuex'
 
 export default {
   name: 'Hero',
+  mixins: [picaso],
   layout: 'backoffice',
   middleware: 'mustBeLogged',
   data() {
@@ -134,9 +143,6 @@ export default {
     ...mapState({
       user: (state) => state.user,
     }),
-    imgSrc() {
-      return require(`@/assets/img/${this.hero.heroSrc}`)
-    },
   },
   async beforeMount() {
     const response = await this.$axios.get(`/info/hero/`)
@@ -146,6 +152,7 @@ export default {
     ...mapActions({
       openSuccess: 'openSuccess',
       openError: 'openError',
+      setImageContext: 'pannel/changeImage',
     }),
     async save() {
       const userToken = this.user.token
@@ -157,10 +164,14 @@ export default {
         this.openSuccess(`Logramos guardar toda la Cabezera!.`)
         // this.$router.push('/panel/fotos')
       } else {
-        this.openSuccess(
+        this.openError(
           `Hubo un error guardando la Cabezera. Proba recargando el sitio.`
         )
       }
+    },
+    changeImage(imageContext) {
+      this.setImageContext(imageContext)
+      this.$router.push('/panel/edit')
     },
   },
 }

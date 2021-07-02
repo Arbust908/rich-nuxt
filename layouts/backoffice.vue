@@ -50,6 +50,13 @@
               />
             </template>
           </PannelSideBtn>
+          <!-- <PannelSideBtn links="/panel/edit" name="Editar Fotos">
+            <template #icon>
+              <IconOutlineClipboardList
+                class="text-orange-300 group-hover:text-white h-6 w-6"
+              />
+            </template>
+          </PannelSideBtn> -->
           <!-- <PannelSideBtn links="/panel/ajustes" name="Ajustes">
             <template #icon>
               <IconOutlineCog
@@ -141,6 +148,13 @@
                       />
                     </template>
                   </PannelSideBtnMobile>
+                  <!-- <PannelSideBtnMobile links="/panel/edit" name="Editar Fotos">
+                    <template #icon>
+                      <IconOutlineClipboardList
+                        class="text-orange-300 group-hover:text-white h-6 w-6"
+                      />
+                    </template>
+                  </PannelSideBtnMobile> -->
                   <!-- <PannelSideBtnMobile links="/panel/ajustes" name="Ajustes">
                     <template #icon>
                       <IconOutlineCog
