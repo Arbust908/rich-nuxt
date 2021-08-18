@@ -17,6 +17,7 @@
           <label for="firstName" class="sr-only">Nombre</label>
           <input
             id="firstName"
+            v-model="sub.name"
             name="firstName"
             type="text"
             autocomplete="name"
@@ -27,6 +28,7 @@
           <label for="emailAddress" class="sr-only">Email address</label>
           <input
             id="emailAddress"
+            v-model="sub.email"
             name="emailAddress"
             type="email"
             autocomplete="email"
@@ -38,6 +40,7 @@
             <button
               type="submit"
               class="w-full flex items-center justify-center py-3 px-5 border border-transparent text-base font-medium rounded-md text-white bg-orange-600 hover:bg-orange-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-orange-500"
+              @click.prevent="subscribe"
             >
               Sumame!
             </button>
@@ -51,3 +54,33 @@
     </div>
   </div>
 </template>
+
+<script>
+import { mapActions } from 'vuex'
+export default {
+  data() {
+    return {
+      sub: {
+        name: '',
+        email: '',
+      },
+    }
+  },
+  methods: {
+    ...mapActions({
+      openSuccess: 'openSuccess',
+      openError: 'openError',
+    }),
+    async subscribe() {
+      this.sub.time = new Date()
+      const response = await this.$axios.post(`/info/subs/`, this.sub)
+      console.log(response)
+      if (response.data.status === 'success') {
+        this.openSuccess(`Gracias por suscribitre!`)
+      } else {
+        this.openError(`Hubo un error al subscribirte!`)
+      }
+    },
+  },
+}
+</script>

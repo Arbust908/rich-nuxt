@@ -33,7 +33,7 @@ export const actions = {
       template: 'Consults',
       title: 'Politicas',
       politics: state.policies,
-      link: 'https://wa.me/5491138766488',
+      link: 'https://mobile.wonoma.com/#/centro/564',
     }
     commit('OPEN_MODAL', consultModalInfo)
   },

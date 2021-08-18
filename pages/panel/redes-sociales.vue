@@ -160,6 +160,32 @@
             </div>
           </div>
         </div>
+        <!--  -->
+        <div class="grid grid-cols-1 gap-y-6 gap-x-4">
+          <div class="">
+            <label
+              for="whatsapp"
+              class="block text-sm font-medium text-gray-700"
+            >
+              Whatsapp
+            </label>
+            <div class="mt-1 flex rounded-md shadow-sm">
+              <input
+                id="whatsapp"
+                v-model="socials.whatsapp"
+                :this="socials.whatsapp"
+                type="text"
+                name="whatsapp"
+                class="flex-1 focus:ring-orange-500 focus:border-orange-500 block w-full min-w-0 sm:text-sm border-gray-300 rounded-l-md border-r-0"
+              />
+              <span
+                class="inline-flex items-center px-3 rounded-r-md border border-l-0 border-gray-300 bg-gray-50 text-gray-500 sm:text-sm"
+              >
+                <IconWhatsapp class="w-5 h-5" />
+              </span>
+            </div>
+          </div>
+        </div>
       </div>
     </div>
 
@@ -199,6 +225,7 @@ export default {
         youtube: 'UCGn0RPDob9Ohaux-xUIAbog',
         tienda: 'richtiendashop.mitiendanube.com/',
         turnera: 'mobile.wonoma.com/#/centro/564',
+        whatsapp: '5491138766488',
       },
     }
   },
@@ -235,6 +262,7 @@ export default {
         youtube: `https://youtube.com/channel/${this.socials.youtube}`,
         tienda: `https://${this.socials.tienda}`,
         turnera: `https://${this.socials.turnera}`,
+        whatsapp: `https://wa.me/${this.socials.whatsapp}?text=Hola%20Rich%20tengo%20una%20Constula!`,
       }
       const userToken = this.user.token
       const response = await this.$axios.patch(
@@ -276,12 +304,18 @@ export default {
             case 'youtube':
               spliter = 'https://youtube.com/channel/'
               break
+            case 'whatsapp':
+              spliter = 'https://wa.me/'
+              break
             case 'tienda':
             case 'turnera':
               spliter = 'https://'
               break
           }
           url = url.split(spliter)[1]
+          if (social === 'whatsapp') {
+            url = url.split('?text=')[0]
+          }
           socialObj[social] = url
         }
       }

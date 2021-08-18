@@ -13,6 +13,9 @@
         <a :href="redes.instagram" target="_blank">
           <IconInstagram class="icon ig" />
         </a>
+        <a :href="redes.whatsapp" target="_blank">
+          <IconWhatsapp class="icon whapp" />
+        </a>
         <a :href="redes.youtube" target="_blank">
           <IconYouTube class="icon yt" />
         </a>
@@ -51,6 +54,9 @@ section {
 }
 .ig.icon:hover {
   @apply text-purple-400;
+}
+.whapp.icon:hover {
+  @apply text-green-600;
 }
 .yt.icon:hover {
   @apply text-red-600;

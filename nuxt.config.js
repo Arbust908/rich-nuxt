@@ -139,15 +139,15 @@ export default {
   ],
 
   axios: {
-    baseURL: process.env.API_URL || 'https://api.richcova.com/',
+    baseURL: 'https://api.richcova.com/',
   },
 
   env: {
-    baseURL: process.env.API_URL || 'https://api.richcova.com/',
+    baseURL: 'https://api.richcova.com/',
   },
 
   publicRuntimeConfig: {
-    baseURL: process.env.API_URL || 'https://api.richcova.com/',
+    baseURL: 'https://api.richcova.com/',
   },
 
   pwa: {

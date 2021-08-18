@@ -44,7 +44,7 @@
       class="relative w-full h-72 md:h-96 lg:absolute lg:inset-y-0 lg:right-0 lg:w-1/2 lg:h-full"
     >
       <img
-        class="absolute inset-0 w-full h-full object-cover lg:rounded-bl-md"
+        class="absolute inset-0 w-full h-full object-contain lg:rounded-bl-md bg-white"
         :src="getApiImage(heroImage)"
         alt="Imagen de Rich Cova"
       />

@@ -34,7 +34,7 @@
           />
         </h1>
       </article>
-      <article class="max-w-2xl flex gap-4 relative">
+      <article class="max-w-2xl flex flex-col gap-4 relative">
         <img
           :src="getApiImage(hero.heroSrc)"
           class="object-cover pointer-events-none rounded max-w-sm"
@@ -67,7 +67,7 @@
           />
         </button>
         <div>
-          <strong>Accion</strong>
+          <strong>Acción</strong>
           <div class="relative">
             <input
               type="text"
@@ -94,7 +94,7 @@
           />
         </button>
         <div>
-          <strong>Accion</strong>
+          <strong>Acción</strong>
           <input
             v-model="hero.buttons.second.link"
             type="text"

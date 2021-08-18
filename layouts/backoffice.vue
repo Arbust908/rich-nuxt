@@ -50,6 +50,13 @@
               />
             </template>
           </PannelSideBtn>
+          <PannelSideBtn links="/panel/subs" name="Subscriptores">
+            <template #icon>
+              <IconOutlineAtSymbol
+                class="text-orange-300 group-hover:text-white h-6 w-6"
+              />
+            </template>
+          </PannelSideBtn>
           <!-- <PannelSideBtn links="/panel/edit" name="Editar Fotos">
             <template #icon>
               <IconOutlineClipboardList
@@ -144,6 +151,13 @@
                   >
                     <template #icon>
                       <IconOutlineCollection
+                        class="text-orange-300 group-hover:text-white h-6 w-6"
+                      />
+                    </template>
+                  </PannelSideBtnMobile>
+                  <PannelSideBtnMobile links="/panel/subs" name="Subscriptores">
+                    <template #icon>
+                      <IconOutlineAtSymbol
                         class="text-orange-300 group-hover:text-white h-6 w-6"
                       />
                     </template>

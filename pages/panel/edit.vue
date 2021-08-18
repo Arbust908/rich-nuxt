@@ -52,6 +52,7 @@
             </svg>
             <div class="flex text-sm text-gray-600">
               <label
+                v-if="!uploading"
                 for="file-upload"
                 class="relative cursor-pointer bg-white px-6 py-2 rounded-md font-medium text-orange-600 hover:bg-orange-500 hover:text-white focus-within:outline-none focus-within:ring-2 focus-within:ring-offset-2 focus-within:ring-orange-500 mx-auto"
                 @click="chooseImage"
@@ -63,7 +64,7 @@
                   type="file"
                   class="sr-only"
                   accept="image/jpeg, image/png"
-                  @input="onSelectFile"
+                  @change="onSelectFile"
                 />
                 <input
                   v-model="imgCtx.fileName"
@@ -72,6 +73,12 @@
                   class="sr-only"
                 />
               </label>
+              <div
+                v-else
+                class="relative cursor-pointer bg-white px-6 py-2 rounded-md font-medium text-orange-600 hover:bg-orange-500 hover:text-white focus-within:outline-none focus-within:ring-2 focus-within:ring-offset-2 focus-within:ring-orange-500 mx-auto"
+              >
+                {{ uploading }}
+              </div>
             </div>
             <p class="text-xs text-orange-400">PNG, JPG, GIF hasta 10MB</p>
           </div>
@@ -98,7 +105,8 @@ export default {
   data() {
     return {
       previewImage: null,
-      files: null,
+      selectedFile: null,
+      uploading: false,
     }
   },
   head() {
@@ -112,10 +120,10 @@ export default {
       user: (state) => state.user,
     }),
     imgSrc() {
-      return this.imgCtx && this.imgCtx.heroSrc
-        ? this.getApiImage(this.imgCtx.heroSrc)
-        : this.previewImage
+      return this.previewImage
         ? this.previewImage
+        : this.imgCtx && this.imgCtx.heroSrc
+        ? this.getApiImage(this.imgCtx.heroSrc)
         : null
     },
   },
@@ -126,16 +134,21 @@ export default {
       setImageContext: 'pannel/changeImage',
     }),
     async save() {
-      const userToken = this.user.token
-      const input = this.$refs.fileInput
-      console.log(input.files)
-      const response = await this.$axios.post(
-        `/upload/${userToken}`,
-        input.files
-      )
+      // const userToken = this.user.token
+      const fd = new FormData()
+      fd.append('image', this.selectedFile, this.imgCtx.heroSrc)
+      const response = await this.$axios.post(`/upload/image`, fd, {
+        onUploadProgress: (uploadEvent) => {
+          this.uploading =
+            Math.round((uploadEvent.loaded / uploadEvent.total) * 100) + '%'
+        },
+      })
+      console.log(response)
       if (response.data.status === 'success') {
-        this.openSuccess(`Logramos guardar la nueva imagen.`)
-        // this.$router.push('/panel/fotos')
+        this.openSuccess(
+          `Logramos guardar la nueva imagen. El cambio puede tardar unos minutos en impactar.`
+        )
+        this.uploading = false
       } else {
         this.openError(`Hubo un error guardando la Imagen.`)
       }
@@ -144,11 +157,13 @@ export default {
       this.$refs.fileInput.click()
     },
 
-    onSelectFile() {
+    onSelectFile(event) {
+      this.selectedFile = event.target.files[0]
+      console.log(this.selectedFile)
       const input = this.$refs.fileInput
       const files = input.files
       if (files && files[0]) {
-        this.files = files
+        // this.selectedFile = files
         const reader = new FileReader()
         reader.onload = (e) => {
           this.previewImage = e.target.result
