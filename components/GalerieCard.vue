@@ -1,13 +1,13 @@
 <template>
   <article class="flex flex-col rounded-lg shadow-lg overflow-hidden">
-    <div class="flex-1">
+    <div class="flex-1 bg-gray-300 w-full">
       <img
         class="h-full w-full object-cover"
         :src="getApiImage(image)"
         :alt="fullName"
       />
     </div>
-    <div class="flex-shrink-0 bg-white py-4 px-6 flex flex-col justify-between">
+    <!-- <div class="flex-shrink-0 bg-white py-4 px-6 flex flex-col justify-between">
       <div class="flex items-center">
         <p class="font-medium text-gray-900">
           <span class="font-bold pr-2">{{ fullName }}</span>
@@ -19,7 +19,7 @@
       <p v-if="text" class="text-sm font-medium text-gray-900">
         {{ text }}
       </p>
-    </div>
+    </div> -->
   </article>
 </template>
 
@@ -52,3 +52,9 @@ export default {
   },
 }
 </script>
+
+<style scoped>
+div {
+  aspect-ratio: 1 / 1;
+}
+</style>

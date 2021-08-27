@@ -25,20 +25,51 @@
       <div
         v-for="(politica, key) in politicas"
         :key="key"
-        class="mt-1 flex gap-2 items-start"
+        class="mt-1 flex gap-2 items-start relative"
       >
         <label
           :for="`politica-${key}`"
           class="block text-xl font-bold text-gray-700 sm:mt-px sm:pt-2 w-5"
         >
-          {{ key }}
+          {{ Number(key) + 1 }}
         </label>
         <textarea
           v-model="politicas[key]"
           :name="`politica-${key}`"
-          rows="5"
+          rows="10"
           class="max-w-lg shadow-sm block w-full focus:ring-orange-500 focus:border-orange-500 sm:text-sm border border-gray-300 rounded-md"
         />
+        <button
+          class="absolute bottom-0 left-0 transition duration-200 hover:text-white rounded hover:bg-red-500"
+          @click="deletePolicy(key)"
+        >
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            class="h-6 w-6"
+            fill="none"
+            viewBox="0 0 24 24"
+            stroke="currentColor"
+          >
+            <path
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              stroke-width="2"
+              d="M10 14l2-2m0 0l2-2m-2 2l-2-2m2 2l2 2m7-2a9 9 0 11-18 0 9 9 0 0118 0z"
+            />
+          </svg>
+        </button>
+      </div>
+      <div class="mt-1 flex gap-2 items-start">
+        <p class="block text-xl font-bold text-gray-700 sm:mt-px sm:pt-2 w-5">
+          {{ lastPolitica }}
+        </p>
+        <button
+          class="bg-gray-200 opacity-50 max-w-lg shadow-sm block w-full h-full font-bold text-2xl focus:ring-orange-500 focus:border-orange-500 border border-gray-300 rounded-md hover:shadow-md hover:bg-white transition duration-200 ease-out"
+          style="height: 218px"
+          @click="addPolicy"
+        >
+          Agregar nueva politica
+        </button>
       </div>
     </div>
   </div>
@@ -53,7 +84,7 @@ export default {
   middleware: 'mustBeLogged',
   data() {
     return {
-      politicas: {},
+      politicas: [],
     }
   },
   head() {
@@ -65,6 +96,10 @@ export default {
     ...mapState({
       user: (state) => state.user,
     }),
+    lastPolitica() {
+      const politicsAsArray = Object.keys(this.politicas)
+      return politicsAsArray.length + 1 || 0
+    },
   },
   async beforeMount() {
     const response = await this.$axios.get(`/info/policies/`)
@@ -75,6 +110,12 @@ export default {
       openSuccess: 'openSuccess',
       openError: 'openError',
     }),
+    addPolicy() {
+      this.politicas.push('')
+    },
+    deletePolicy(key) {
+      this.politicas.splice(key, 1)
+    },
     async save() {
       this.endWithDot()
       const userToken = this.user.token
@@ -86,7 +127,6 @@ export default {
         this.openSuccess(
           `Las ${this.politicas.length} politicas se guardaron bien!.`
         )
-        // this.$router.push('/panel/fotos')
       } else {
         this.openSuccess(
           `Hubo un error guardando las politicas. Proba recargando el sitio.`
@@ -108,5 +148,3 @@ export default {
   },
 }
 </script>
-
-data() { return { timeline, } },

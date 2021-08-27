@@ -3,7 +3,7 @@
     class="relative bg-white pt-16 pb-20 px-4 sm:px-6 lg:pt-24 lg:pb-28 lg:px-8"
   >
     <div class="absolute inset-0">
-      <div class="bg-orange-50 h-1/3 sm:h-2/3"></div>
+      <div class="bg-orange-50 h-2/3 sm:h-3/6 lg:h-1/3"></div>
     </div>
     <div class="relative max-w-7xl mx-auto">
       <div class="text-center">
@@ -19,7 +19,7 @@
         </p>
       </div>
       <div
-        class="mt-12 max-w-lg mx-auto grid gap-5 lg:grid-cols-3 lg:max-w-none"
+        class="mt-12 max-w-lg mx-auto grid sm:grid-cols-2 gap-5 lg:grid-cols-3 lg:max-w-none"
       >
         <GalerieCard
           v-for="(inform, key) in galerias"
