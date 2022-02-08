@@ -18,6 +18,7 @@
             :date="inform.fecha"
           />
         </section>
+        <button @click="images.push({})">Agregar otra Foto</button>
       </div>
     </main>
   </div>

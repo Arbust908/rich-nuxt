@@ -102,8 +102,6 @@ export default {
 
   components: true,
 
-  // serverMiddleware: ['~/api/index.js'],
-
   buildModules: ['@nuxtjs/eslint-module', '@nuxtjs/tailwindcss'],
 
   modules: [
